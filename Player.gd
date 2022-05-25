@@ -1,4 +1,4 @@
-extends "res://Gravity.gd"
+extends "res://utils/Moving.gd"
 
 signal hit
 
@@ -6,7 +6,6 @@ signal hit
 export var speed = 14
 
 func _physics_process(delta):
-	._physics_process(delta)
 	
 	var direction = Vector3.ZERO
 	if Input.is_action_pressed("move_right"):
@@ -21,6 +20,6 @@ func _physics_process(delta):
 	# Ground velocity
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
-	# Moving the character
-	velocity = move_and_slide(velocity, Vector3.UP)
+	
+	._physics_process(delta)
 
