@@ -33,4 +33,4 @@ transform = Transform( 1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30 )
 
 [node name="Crabby" parent="." instance=ExtResource( 3 )]
-transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 9.48095, -8.80986 )
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.88053, -8.80986 )

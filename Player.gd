@@ -23,3 +23,9 @@ func _physics_process(delta):
 	
 	._physics_process(delta)
 
+func attack():
+	$AnimationPlayer.play("Basic Attack")
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("basic_attack"):
+		attack()
