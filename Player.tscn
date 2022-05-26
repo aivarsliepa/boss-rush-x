@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Sword.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/sword/Sword.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -79,7 +79,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5,
 shape = SubResource( 2 )
 
 [node name="Sword" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.5, 0.517638, 1.86602, -0.8499, 1.67303, -0.691832, -1.74002, -0.965926, -0.198288, 1, 1, 0 )
+transform = Transform( -0.5, 0.517637, 1.86602, -0.849901, 1.67303, -0.69183, -1.74002, -0.965926, -0.198287, 1, 1, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

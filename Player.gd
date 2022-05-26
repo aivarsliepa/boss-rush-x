@@ -4,6 +4,12 @@ signal hit
 
 # How fast the player moves in meters per second.
 export var speed = 14
+var hp = 3
+
+func hit():
+	hp -= 1
+	if (hp == 1):
+		print("dead")
 
 func _physics_process(delta):
 	
@@ -16,6 +22,8 @@ func _physics_process(delta):
 		direction.z += 1
 	if Input.is_action_pressed("move_up"):
 		direction.z -= 1
+
+	direction = direction.normalized()
 
 	# Ground velocity
 	velocity.x = direction.x * speed
