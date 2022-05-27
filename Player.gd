@@ -1,14 +1,15 @@
 extends "res://utils/Moving.gd"
 
-signal hit
+signal hit(new_health)
 
 # How fast the player moves in meters per second.
 export var speed = 14
-var hp = 3
+var health = 3
 
 func hit():
-	hp -= 1
-	if (hp == 1):
+	health -= 1
+	emit_signal("hit", health)
+	if (health == 0):
 		print("dead")
 
 func _physics_process(delta):
