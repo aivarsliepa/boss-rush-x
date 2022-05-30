@@ -2,9 +2,13 @@ extends "res://utils/Moving.gd"
 
 signal hit(new_health)
 
-# How fast the player moves in meters per second.
-export var speed = 14
+onready var animation_player = $AnimationPlayer
+onready var dash_timer = $DashTimer
+
+var speed = 14
+var dash_speed = 75
 var health = 3
+var is_dashing = false
 
 func hit():
 	health -= 1
@@ -13,6 +17,9 @@ func hit():
 		print("dead")
 
 func _physics_process(delta):
+	
+	if Input.is_action_just_pressed("dash"):
+		dash()
 	
 	var direction = Vector3.ZERO
 	if Input.is_action_pressed("move_right"):
@@ -27,14 +34,32 @@ func _physics_process(delta):
 	direction = direction.normalized()
 
 	# Ground velocity
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
+	if is_dashing:
+		velocity.x = direction.x * dash_speed
+		velocity.z = direction.z * dash_speed
+	else:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+	
+	rotation.y = atan2(-velocity.x, -velocity.z)	
+	# smooth rotation, apply maybe later
+	#if direction.length() > 0:
+		# rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), 20 * delta)
+	
 	
 	._physics_process(delta)
 
 func attack():
-	$AnimationPlayer.play("Basic Attack")
+	animation_player.play("Basic Attack")
+	
+func dash():
+	dash_timer.start()
+	is_dashing = true
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("basic_attack"):
 		attack()
+
+
+func _on_DashTimer_timeout() -> void:
+	is_dashing = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://weapons/sword/Sword.tscn" type="PackedScene" id=2]
@@ -36,33 +36,6 @@ tracks/1/keys = {
 "values": [ Vector3( 82.2012, 98.0601, 104.29 ), Vector3( 82.2012, -171.94, 104.29 ), Vector3( 82.2012, -66.9399, 104.29 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sword:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sword:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 20.2377, 96.0656, -26.9306 ) ]
-}
-
 [node name="Player" type="KinematicBody" groups=["players"]]
 collision_layer = 2
 collision_mask = 15
@@ -79,11 +52,14 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5,
 shape = SubResource( 2 )
 
 [node name="Sword" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.5, 0.517637, 1.86602, -0.849902, 1.67303, -0.691829, -1.74002, -0.965926, -0.198287, 1, 1, 0 )
+transform = Transform( 0.255956, 0.00970139, 1.98352, -0.298158, 1.97744, 0.0288028, -1.96102, -0.299388, 0.254515, 1.05093, 1, -0.2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "RESET"
 "anims/Basic Attack" = SubResource( 3 )
-anims/RESET = SubResource( 4 )
 "next/Basic Attack" = "RESET"
-next/RESET = "RESET"
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
